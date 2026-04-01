@@ -4,6 +4,7 @@ import XokcalMybatis.String.StringInterface.XokcalMybatisStringHander;
 
 import java.util.Arrays;
 
+//ORM 解析引擎！
 public class XokcalMybatisStringSQL implements XokcalMybatisStringHander {
 
     private static final String PRAM_IS_EMPTY_ERROR = "调用XokcalMybatisStringSQL方法参数为空";
@@ -34,8 +35,7 @@ public class XokcalMybatisStringSQL implements XokcalMybatisStringHander {
                 for (int j = i; j < chars.length; j++) {
                     if (chars[j] == '}') {
                         num++;
-                        startIndex++;
-                        return recodeSqlFollowCharLength(sql, j, num); //
+                        return recodeSqlFollowCharLength(sql, j, num - 1); //
                     } else {
                         num++;
                     }
@@ -54,8 +54,8 @@ public class XokcalMybatisStringSQL implements XokcalMybatisStringHander {
                 index++;
                 return StringArrToString(r);
             }
-            if (sqlC[i + 1] == '#' && sqlC[i + 2] == '{'){
-                r[index] = " ?";
+            if (sqlC[i] == '#' && sqlC[i + 1] == '{'){
+                r[index] = "?";
                 index++;
                 while (i < sqlC.length){
                     if (sqlC[i] == '}'){
