@@ -31,11 +31,11 @@ public class XokcalMybatisStringSQL implements XokcalMybatisStringHander {
         char[] chars = sql.toCharArray();
         for (int i = startIndex; i < chars.length; i++) {
             startIndex++;
-            if (chars[i] == '#' && chars[i + 1] == '{') {
+            if ((chars[i] == '#' && chars[i + 1] == '{')) {
                 for (int j = i; j < chars.length; j++) {
                     if (chars[j] == '}') {
                         num++;
-                        return recodeSqlFollowCharLength(sql, j, num - 1); //
+                        return recodeSqlFollowCharLength(sql, j, num - 1);
                     } else {
                         num++;
                     }
@@ -54,7 +54,8 @@ public class XokcalMybatisStringSQL implements XokcalMybatisStringHander {
                 index++;
                 return StringArrToString(r);
             }
-            if (sqlC[i] == '#' && sqlC[i + 1] == '{'){
+            if ((sqlC[i] == '#' && sqlC[i + 1] == '{') ||
+                    (sqlC[i] == '$' && sqlC[i + 1] == '{')){
                 r[index] = "?";
                 index++;
                 while (i < sqlC.length){
@@ -98,7 +99,8 @@ public class XokcalMybatisStringSQL implements XokcalMybatisStringHander {
             if (isStore == true){
                 temp += sqlC[i];
             }
-            if (sqlC[i] == '#' && sqlC[i + 1] == '{') {
+            if ((sqlC[i] == '#' && sqlC[i + 1] == '{') ||
+                    (sqlC[i] == '$' && sqlC[i + 1] == '{')) {
                 isStore = true;
                 i = i + 1;
             }
@@ -112,7 +114,8 @@ public class XokcalMybatisStringSQL implements XokcalMybatisStringHander {
         char[] sqlC = sql.toCharArray();
         int count = 0;
         for (int i = 0; i < sqlC.length; i++) {
-            if (sqlC[i] == '#' && sqlC[i + 1] == '{') {
+            if ((sqlC[i] == '#' && sqlC[i + 1] == '{') ||
+                    (sqlC[i] == '$' && sqlC[i + 1] == '{')){
                 count++;
             }
         }

@@ -21,24 +21,23 @@ public class UserImpl {
 //        user.forEach(System.out::println);
 //        List<Integer> userId = userMapper.getUserId(0, 5);
 //        userId.forEach(System.out::println);
-        String a = "<select id=\"selectWordByCondition\" resultType=\"com.example.wordmanagefilesystem.Pojo.Word\">\n" +
-                "        select * from public_vocabulary\n" +
+        String a = "<mapper namespace=\"com.example.cangqiong.Mapper.SetmealMapper\">\n" +
+                "    <select id=\"selectSetmealPage\" resultType=\"com.example.cangqiong.Pojo.Setmeal.SetmealAndDishBody\">\n" +
+                "        select * from setmeal\n" +
                 "            <where>\n" +
-                "                <if test=\"p.word != null and p.word != '' \">\n" +
-                "                    word like concat('%',#{p.word},'%')\n" +
+                "                <if test=\"param.categoryId != null and param.categoryId != ''\">\n" +
+                "                    categoryId = #{param.categoryId}\n" +
                 "                </if>\n" +
-                "                <if test=\"p.meaning != null and p.meaning != '' \">\n" +
-                "                    and meaning like concat('%',#{p.meaning},'%')\n" +
+                "                <if test=\"param.name != null and param.name != ''\">\n" +
+                "                    and name = #{param.name}\n" +
                 "                </if>\n" +
-                "                <if test=\"p.wordClass != null and p.wordClass != '' \">\n" +
-                "                    and part_of_speech like concat('%',#{p.wordClass},'%')\n" +
-                "                </if>\n" +
-                "                <if test=\"p.selectDegrad != null and p.selectDegrad != '' \">\n" +
-                "                    and belong_grade like concat('%',#{p.selectDegrad},'%')\n" +
+                "                <if test=\"param.status != null \">\n" +
+                "                    and status = #{param.status}\n" +
                 "                </if>\n" +
                 "            </where>\n" +
-                "        limit #{start} , #{p.size}\n" +
-                "    </select>";
+                "        limit ${start} , ${param.pageSize}\n" +
+                "    </select>\n" +
+                "</mapper>";
         String s = stringHander.sqlStringToPreStatementExecutable(a);
         System.out.println(s);
         String[] sqlParamStringArray = stringHander.getSqlParamStringArray(a);
