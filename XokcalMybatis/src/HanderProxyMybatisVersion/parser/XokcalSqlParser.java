@@ -1,13 +1,6 @@
+package HanderProxyMybatisVersion.parser;
 
-package XokcalMybatis.String.StringClass;
-
-import XokcalMybatis.String.StringInterface.XokcalMybatisStringHander;
-
-import java.util.Arrays;
-
-//ORM 解析引擎！
-public class XokcalMybatisStringSQL implements XokcalMybatisStringHander {
-
+public class XokcalSqlParser implements XokcalParser{
     private static final String PRAM_IS_EMPTY_ERROR = "调用XokcalMybatisStringSQL方法参数为空";
 
     //处理sql语句，将sql语句中的 #{...} 转化为 ? 并且获取括号里面的字段
@@ -122,5 +115,4 @@ public class XokcalMybatisStringSQL implements XokcalMybatisStringHander {
         }
         return count;
     }
-
 }

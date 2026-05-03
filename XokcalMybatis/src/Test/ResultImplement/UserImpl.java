@@ -21,8 +21,7 @@ public class UserImpl {
 //        user.forEach(System.out::println);
 //        List<Integer> userId = userMapper.getUserId(0, 5);
 //        userId.forEach(System.out::println);
-        String a = "<mapper namespace=\"com.example.cangqiong.Mapper.SetmealMapper\">\n" +
-                "    <select id=\"selectSetmealPage\" resultType=\"com.example.cangqiong.Pojo.Setmeal.SetmealAndDishBody\">\n" +
+        String a ="<select id=\"selectSetmealPage\" resultType=\"com.example.cangqiong.Pojo.Setmeal.SetmealAndDishBody\">\n" +
                 "        select * from setmeal\n" +
                 "            <where>\n" +
                 "                <if test=\"param.categoryId != null and param.categoryId != ''\">\n" +
@@ -35,9 +34,8 @@ public class UserImpl {
                 "                    and status = #{param.status}\n" +
                 "                </if>\n" +
                 "            </where>\n" +
-                "        limit ${start} , ${param.pageSize}\n" +
-                "    </select>\n" +
-                "</mapper>";
+                "        limit #{start} , #{param.pageSize}\n" +
+                "    </select>           ";
         String s = stringHander.sqlStringToPreStatementExecutable(a);
         System.out.println(s);
         String[] sqlParamStringArray = stringHander.getSqlParamStringArray(a);
